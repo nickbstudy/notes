@@ -46,7 +46,27 @@ import packageName.ClassName;
 Methods are functions inside classes - basically where all the work gets done.
 
 ```
-public void sayHello() {
-    System.out.println("Hello");
+
+public class Person {
+    private String middleName = "John";
+    public char getMiddleInitial() {
+        return middleName.charAt(0);
+    }
+
+    public int add(int num1, int num2) {
+        return num1 + num2;
+    }
+
+    public static void main(String[] args) {
+        Person p1 = new Person();
+        System.out.println(p1.getMiddleInitial());
+        System.out.println(p1.add(3, 8));
+    }
 }
 ```
+
+Output would be: 
+>J
+>11
+
+`char` and `int` indicate return type - otherwise use `void`
