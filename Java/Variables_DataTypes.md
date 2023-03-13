@@ -13,6 +13,7 @@ or
 - long (really big int)
 - char (single character, initialize with 'single quote')
 - byte
+- float (put `f` after number)
 
 Classes can be a data type - that creates an object.  Syntax is:  
 `private Person tom = new Person()`

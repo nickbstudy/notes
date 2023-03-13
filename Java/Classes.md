@@ -46,7 +46,6 @@ import packageName.ClassName;
 Methods are functions inside classes - basically where all the work gets done.
 
 ```
-
 public class Person {
     private String middleName = "John";
     public char getMiddleInitial() {
@@ -70,3 +69,17 @@ Output would be:
 >11
 
 `char` and `int` indicate return type - otherwise use `void`
+
+You can add the `static` keyword to a method to initialize it on build, so it can be called without having to create an instance of an object.  This can be useful in 'utility classes' etc.
+
+### Varargs
+
+If you don't know how many args you will be receiving, put `...` after the type and it will turn all provided values into an array:
+
+```
+public void lottaNames(String... names) {
+    // do something with all of them
+}
+```
+
+This makes it easier to call, you can just provide values instead of an array.  If you require other args of another type they must be specified first, then varargs last.
