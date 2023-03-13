@@ -65,7 +65,7 @@ public class Person {
 ```
 
 Output would be: 
->J
+>J  
 >11
 
 `char` and `int` indicate return type - otherwise use `void`
