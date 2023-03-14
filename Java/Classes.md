@@ -65,12 +65,12 @@ public class Person {
 ```
 
 Output would be: 
->J  
+>J
 >11
 
 `char` and `int` indicate return type - otherwise use `void`
 
-You can add the `static` keyword to a method to initialize it on build, so it can be called without having to create an instance of an object.  This can be useful in 'utility classes' etc.
+You can add the `static` keyword to a method to initialize it on build, so it can be called without having to create an instance of an object.  This can be useful in 'utility classes' etc.  It can be added to variables that need to be accessed without making an object too (usually for constants).  All instances of the class will share the single static variable.
 
 ### Varargs
 
