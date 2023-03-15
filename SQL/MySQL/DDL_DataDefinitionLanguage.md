@@ -8,10 +8,23 @@ The `CREATE` statement is used for creating entire databases and database object
 ```
 CREATE object_type object_name;
 
-CREATE TABLE object_name(column_name data_type);
+CREATE DATABASE IF NOT EXISTS Sales;
+
+CREATE TABLE object_name(column_name data_type constraints);
 ```
 
 Table names can coincide with the name assigned to the database.
+
+Table example (including primary key and auto increment which starts at 1):
+```
+CREATE TABLE sales
+(
+    purchase_number INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    date_of_purchase DATE NOT NULL,
+    customer_id INT,
+    item_code VARCHAR(10) NOT NULL
+);
+```
 
 ---
 The `ALTER` statement is used when altering existing objects, with `ADD` `REMOVE` `RENAME`:

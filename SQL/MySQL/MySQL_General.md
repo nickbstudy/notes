@@ -36,3 +36,9 @@ Defines the relationship between tables - commonly referencing a primary key (th
 
 ##### Unique Keys
 No duplicate values allowed, can be null.
+
+---
+
+### Referring to a database
+
+Either set a default with `USE database_name` or refer to it with `db_name.table_name`
