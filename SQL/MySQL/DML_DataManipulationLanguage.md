@@ -1,6 +1,6 @@
 ### DML - Data Manipulation Language
 
-The `SELECT` statement is used to define what is returned. Getting everything would be `SELECT * FROM table_name`
+The `SELECT` statement is used to define what is returned. Getting everything would be `SELECT * FROM table_name` or `SELECT DISTINCT` to get no duplicate values
 
 ---
 
