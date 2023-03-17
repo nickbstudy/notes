@@ -27,7 +27,7 @@ CREATE TABLE sales
 ```
 
 ---
-The `ALTER` statement is used when altering existing objects, with `ADD` `REMOVE` `RENAME`:
+The `ALTER` statement is used when altering existing objects, with `ADD` `REMOVE` `RENAME` `CHANGE COLUMN` `DROP COLUMN`:
 
 ```
 ALTER TABLE sales
