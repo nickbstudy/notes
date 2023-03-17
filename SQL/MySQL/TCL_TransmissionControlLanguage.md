@@ -10,4 +10,4 @@ COMMIT;
 
 ---
 
-`ROLLBACK` can undo changes
+`ROLLBACK` can undo changes to the last `COMMIT`

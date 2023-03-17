@@ -1,5 +1,7 @@
 #Data types:
 
+#### All data values must be typed inside quotation marks except number types.
+
 #### Text types:
 - `CHAR(5)` - 5 is length - fixed byte consumption - max 255
 - `VARCHAR(5)` - 5 is length, only uses bytes required - max 65k

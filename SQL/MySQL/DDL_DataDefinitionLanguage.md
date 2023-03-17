@@ -33,6 +33,8 @@ The `ALTER` statement is used when altering existing objects, with `ADD` `REMOVE
 ALTER TABLE sales
 ADD COLUMN column_name TYPE;
 ```
+Can also have `AFTER column_name` at the end to specify location
+
 ---
 the `DROP` statement will delete an entire table.
 

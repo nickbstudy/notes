@@ -21,6 +21,9 @@ UPDATE sales
 SET date_of_purchase = '2022-12-12'
 WHERE purchase_number = 1;
 ```
+
+**It is very important to include a `WHERE` condition, otherwise all records could be updated**
+
 ---
 
 The `DELETE` statement will remove all records from a table unless conditions are given with `WHERE`:
@@ -28,3 +31,5 @@ The `DELETE` statement will remove all records from a table unless conditions ar
 DELETE FROM sales
 WHERE
     purchase_number = 1;
+```
+If you need to delete all data `TRUNCATE` is a better option - it will be faster, and reset any auto increment values

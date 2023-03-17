@@ -13,13 +13,13 @@
 
 ---
 
-### ORDER BY
+### `ORDER BY`
 
 `ORDER BY column_name, next_column;` and you can add `ASC` or `DESC`
 
 ---
 
-### GROUP BY
+### `GROUP BY`
 
 Commonly combined with aggregate functions, syntax is:
 ```
@@ -45,3 +45,22 @@ Used to rename a selection from your query with the keyword `AS` e.g.
 `SELECT first_name, COUNT(first_name) AS names_count` 
 Just delivers clearer output.
 
+---
+### `LIMIT`
+Final line of a query should be `LIMIT 10;` or however many records you want returned.  Keep in mind ordering, as this will affect which ones you include.
+
+---
+### `IFNULL()`
+To replace null fields with something:
+```
+SELECT 
+    dept_no, IFNULL(dept_name, 'Dept not provided') AS dept_name
+FROM
+    departments;
+```
+Using the alias is not required but looks much better
+
+---
+### `COALESCE()`
+
+Given multiple arguments, returns the first non-null.
