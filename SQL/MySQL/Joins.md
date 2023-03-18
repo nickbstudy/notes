@@ -22,7 +22,7 @@ This is not restricted to values shared between tables.  Will return all records
 Just like above but returns from latter table.  Seldom applied in practice.
 
 ### Cross Join
-Generates the 'Cartesian Product' of given tables; that is, a combination of all possible records.  Useful if there is no common data between tables.
+Generates the 'Cartesian Product' of given tables; that is, a combination of all possible records.  Useful if there is no common data between tables.  
 ![Cross Join example](https://www.sqlshack.com/wp-content/uploads/2020/02/sql-cross-join-working-principle-1.png)
 
 ### Joining multiple tables
