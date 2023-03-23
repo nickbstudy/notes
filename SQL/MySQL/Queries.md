@@ -63,4 +63,37 @@ Using the alias is not required but looks much better
 ---
 ### `COALESCE()`
 
-Given multiple arguments, returns the first non-null.
+Given multiple arguments, returns the first non-null. Would return `Test` from the below query:
+`SELECT COALESCE(NULL, NULL, NULL, 'Test', NULL, 'Example');`
+
+---
+### `UNION` and `UNION ALL`
+
+`UNION ALL` is used to combine a few `SELECT` statements in a single output - allowing you to unify tables.  There must be the same number of columns in each, and have the same name/order/data type - if this would be difficult you can add 'null columns' (`NULL AS column_name`).  
+`UNION` functions the same but ignores duplicates. Syntax is:  
+```
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+```
+
+---
+### Subqueries
+Also called 'Inner queries' or 'Nested queries', these are used to narrow down returned data by using other tables.  The inner query must be surrounded by parentheses.  This can be in `WHERE` with `IN` OR `EXISTS`, both of which can be prefixed with `NOT`.  `IN` is bettter for small data sets and `EXISTS` is for larger ones.  SQL will process the inner query first, then use that in comparing the outer ones.  Syntax for `IN` is:
+```
+SELECT * FROM employees e
+WHERE e.emp_no IN (
+    SELECT m.emp_no
+    FROM dept_manager m
+);
+```
+And an example of `EXISTS`:
+```
+SELECT * FROM employees e
+WHERE EXISTS (
+	SELECT * FROM titles t
+	WHERE t.emp_no = e.emp_no
+	AND title = 'Assistant Engineer'
+);
+```
+Subqueries can also be used in `SELECT` or `FROM`
