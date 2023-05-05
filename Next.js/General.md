@@ -2,7 +2,7 @@
 
 [Position in learning](https://nextjs.org/learn/basics/data-fetching/implement-getstaticprops)
 
-Prerenders pages, moving as much logic to HTML and away from JS as possible, enhancing performance and SEO.  When a page is loaded its JS runs and makes the page fully interactive (this process is called 'hydration')
+Prerenders pages, moving as much logic to HTML and away from JS as possible, enhancing performance and SEO.  When a page is loaded its JS runs and makes the page fully interactive (this process is called 'hydration').
 
 ---
 
