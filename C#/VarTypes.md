@@ -13,6 +13,12 @@ e.g.
 string firstName
 ```
 
+Prefix with const to lock it in:
+
+```
+const string firstName = "Nick";
+```
+
 --- 
 
 ### bool
@@ -36,7 +42,7 @@ Generally `int` is fine, is -2b to 2b, [other options here](https://learn.micros
 ### Floating point numbers
 
 float < double or decimal
-Use decimal for currency, avoids rounding errors with floating point types - when declaring decimals end with `M`:  
+Use decimal for currency, avoids rounding errors with floating point types - when declaring decimals end with `M` and float with `f`:  
 `decimal fiveCents = .05M;`
 
 ---
@@ -83,3 +89,59 @@ int example = int.Parse(target);
 ```
 
 Every type has a .ToString() method (which is automatically invoked in Console.Write expressions)
+
+---
+
+### Enums
+
+Multiple constant values can be defined using the `enum` keyword and an identifier name, either after all the other 'top level' statements in the main Program.cs file or in a separate .cs file.  The `enum` class can use `GetName()` to reveal the name at a specified index, or `IsDefined()` to return bool of its existence.  Reference specific indexes (5 shown) with `(enumName)5`
+
+```
+var daysType = typeof(Days);
+string name = Enum.GetName(daysType, 1);
+bool flag = Enum.IsDefined(daysType, "Mon");
+
+Console.WriteLine($"\nFirst Name: {Days.Sat}");
+Console.WriteLine($"1st index: {(int) Days.Sat}");
+Console.WriteLine($"\n2nd index: {name}");
+Console.WriteLine($"Contains Mon? {flag}");
+Console.ReadKey();
+
+
+enum Days { Sat, Sun, Mon, Tue, Wed, Thu, Fri };
+
+// literal values will be:  Sat 0 Sun True
+```
+
+---
+
+### Dictionary
+
+Used to store unique key/value pairs - declared as follows:
+```
+Dictionary <string, string> SomeName = new Dictionary<string, string>();
+```
+
+It has `.Add` and `.Remove` methods and `.Key` and `.Value` properties.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
