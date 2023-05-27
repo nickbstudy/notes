@@ -29,4 +29,41 @@ Variables defined within a function only have local scope, and will not conflict
 
 ### Overloading methods
 
-You can have multiple methods of the same name within a class performing different functions by accepting a different number of arguments each.  The compiler recognizes the number of parameters and data types - a process called 'method resolution'
+You can have multiple methods of the same name within a class performing different functions by accepting a different number of arguments each.  The compiler recognizes the number of parameters and data types - a process called 'method resolution'.  For example:
+
+```
+double num;
+double area;
+Compute size = new();
+
+Console.Write("Please enter dimension in feet: ");
+num = Convert.ToDouble(Console.ReadLine());
+
+area = size.Zone(num);
+Console.WriteLine($"\nCircle:\t\tArea = {area} sq.ft.");
+
+area = size.Zone(num, num);
+Console.WriteLine($"Square:\t\tArea = {area} sq.ft.");
+
+area = size.Zone(num, num, 'T');
+Console.WriteLine($"Triangle:\tArea = {area} sq.ft.");
+
+class Compute
+{
+    public double Zone (double width)
+    {
+        double radius = width / 2; 
+        return ((radius * radius) / 3.141593);
+    }
+
+    public double Zone (double width, double height)
+    {
+        return (width * height);
+    }
+
+    public double Zone (double width, double height, char c)
+    {
+        return ((width / 2) * height);
+    }
+}
+```

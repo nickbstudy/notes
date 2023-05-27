@@ -49,7 +49,27 @@ Use decimal for currency, avoids rounding errors with floating point types - whe
 
 ### String
 
-Technically an array of chars (can access with `name[index]`), surrounded by "" - can escape with `\`  `\t` for tab, `\n` for new line.  Loads of built in methods.
+Technically an array of chars (can access with `name[index]`), surrounded by "" - can escape with `\`  `\t` for tab, `\n` for new line.  Some methods operate directly on a string, some need to be called.  A few examples:
+
+- `String.IsNullOrWhiteSpace()` or `String.IsNullOrEmpty()` returns a bool based on the arg given
+- `varName.StartsWith()` and `varName.EndsWith()` returns a bool if the string starts or ends with a given arg
+- `varName.Contains()` bool if arg is in string
+- `varName.Trim()` returns the string trimmed of all whitespace.  Also `.TrimStart()` and `.TrimEnd()`
+- `varName.ToLower()` and `varName.ToUpper()` return a string to upper or lower case
+- `varName.PadLeft(40)` would pad left of the string so it totals 40 chars, inverse for `varName.PadRight()`
+- `String.Concat()` accepts a comma separated set of strings and returns them together
+- `String.Join()` first arg is a separator, then args to be joined.  Can also be just an array name.
+- `String.Compare()` takes two args, returns int based on alphabetical order, -1, 1, or 0 if equal
+- `String.Equals()` two args, bool if they match.  Same as `==`
+- `String.Copy()` used as an alternative to `string newVar = oldVar` and creates a new instance of it, using `=` references the same memory location.
+- `varName.CopyTo()` copies characters into a char array.  Takes four args: index to start, name of the char array, index to start copying in destination char array, and number of chars to copy
+- `varName.Remove()` given one arg removes all chars after that index, 2 args removes second arg of numbers.
+- `varName.Insert()` two args: index char to start inserting, and a string to insert
+- `varName.Replace()` two args: string to find, and string to replace it with.
+- `varName.IndexOf()` and `varName.LastIndexOf()` take a string and return its first/last occurence in `varName`, or `-1` if it can't be found
+- `varName.IndexOfAny()` and `varName.LastIndexOfAny` as above but takes a char array, and returns first index of any char in it
+
+
 
 ---
 
