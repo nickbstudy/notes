@@ -224,3 +224,9 @@ public sealed class Chicken : Bird
     public override void fly() { Console.WriteLine("A chicken can't fly...\n"); }
 }
 ```
+
+---
+
+### Employing partial classes
+
+Class definitions can be spread across multiple files by including the `partial` keyword in each separate part of the definition.  Add a class to the project with `Alt + Shift + C` (or `Project -> Add Class`) 

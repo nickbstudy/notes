@@ -68,6 +68,11 @@ Technically an array of chars (can access with `name[index]`), surrounded by "" 
 - `varName.Replace()` two args: string to find, and string to replace it with.
 - `varName.IndexOf()` and `varName.LastIndexOf()` take a string and return its first/last occurence in `varName`, or `-1` if it can't be found
 - `varName.IndexOfAny()` and `varName.LastIndexOfAny` as above but takes a char array, and returns first index of any char in it
+  
+##### String Formatting
+
+
+
 
 
 
