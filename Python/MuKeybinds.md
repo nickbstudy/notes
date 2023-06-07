@@ -1,0 +1,2 @@
+- F5 - run
+- Ctrl + K - toggle comment

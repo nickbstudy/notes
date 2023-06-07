@@ -39,7 +39,7 @@ stuff += ['A', 'B', 'C']  # stuff is now [1, 2, 3, 'A', 'B', 'C']
 
 - `random` also has a few methods to work with lists:  `random.choice(listName)` returns a random item, and `random.shuffle(listName)` reorders the existing array (nothing returned).
 
-- `things.index('search')` returns the index of the given arg, or a `ValueError` if not found.
+- `things.index('searchTerm')` returns the index of the given arg, or a `ValueError` if not found.
 
 ---
 
