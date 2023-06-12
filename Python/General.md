@@ -45,3 +45,31 @@ print(spam) # [1, 2, 3, 'Hello']
 
 If you need to create a separate instance of a list the `copy` module has some methods to simplify this.  Make sure to `import copy` then use `newListName = copy.copy(oldListName)` or if the list contains lists use `copy.deepcopy()` instead.
 
+##### Getting arguments
+
+`import sys` and the `sys.argv` list will contain [0] as the path to python then any arguments as further indexes.
+
+```
+#! python3
+# mclip.py - A multi-clipboard program.
+
+TEXT = {'agree': """Yes, I agree. That sounds fine to me.""",
+        'busy': """Sorry, can we do this later this week or next week?""",
+        'upsell': """Would you consider making this a monthly donation?"""}
+        
+        
+import sys, pyperclip
+if len(sys.argv) < 2:
+    print('Usage: python mclip.py [keyphrase] - copy phrase text')
+    sys.exit()
+
+keyphrase = sys.argv[1]
+
+print(sys.argv)
+
+if keyphrase in TEXT:
+    pyperclip.copy(TEXT[keyphrase])
+    print('Text for ' + keyphrase + ' copied to clipboard.')
+else:
+    print('There is no text for ' + keyphrase)
+```
