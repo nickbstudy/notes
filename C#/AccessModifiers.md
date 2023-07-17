@@ -8,3 +8,5 @@
 ---
 
 ##### Static #####
+
+The `static` modifier on a class means that it can not be instantiated, and that all of its members are static.  A static member has one version regardless of how many instances of its enclosing type are created.  In other words, you can't use the `new` keyword to create a variable of the class type.  Its members must be accessed by using the class name itself.
