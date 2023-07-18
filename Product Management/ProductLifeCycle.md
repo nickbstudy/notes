@@ -1,0 +1,5 @@
+- **Development** - spend a lot of time on research, development, and testing
+- **Introduction**
+- **Growth** - Gain traction and users, spread to more departments
+- **Maturity** - Continue improvements to avoid last phase:
+- **Decline** - Better products may be available, product may become dated.  Consider new versions or a redesign.

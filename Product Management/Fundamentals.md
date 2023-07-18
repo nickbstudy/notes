@@ -1,6 +1,6 @@
 **Define a vision** - do extensive research  
 **Create a strategy**   
-**Make a product backlog** an ordered list of everything needed in the product
+**Make a product backlog** - an ordered list of everything needed in the product
  
  ---
 
@@ -15,3 +15,9 @@
 
 - Not a unique product/improvement.  Needs to be better than competition.
 - You shouldn't have to convince people it's a good product.
+
+---
+
+It's up to you to understand the problems that your users are facing, and develop solutions for them.  
+
+Figure out metrics to track to better understand usage
