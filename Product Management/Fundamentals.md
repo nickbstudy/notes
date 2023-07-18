@@ -1,5 +1,5 @@
 **Define a vision** - do extensive research  
-**Create a strategy**
+**Create a strategy**   
 **Make a product backlog** an ordered list of everything needed in the product
  
  ---
