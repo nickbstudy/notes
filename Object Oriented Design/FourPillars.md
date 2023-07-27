@@ -1,0 +1,4 @@
+### Abstraction
+
+Implementation hiding
+

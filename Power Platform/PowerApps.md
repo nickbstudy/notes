@@ -12,6 +12,7 @@ Collect(ShoppingCard,
 {Name: "Item 2", Price: 18})
 ```
 
+`Remove(name, item)` will remove a record from a collection
 `Clear(name)` will delete all records from a collection
 
 `ClearCollect()` will clear all records then start adding new data
@@ -20,3 +21,5 @@ Collect(ShoppingCard,
 
 `SaveData(collectionName, "LocalGivenName")` and `LoadData()` are used for offline capability.  Saves a collection.  If(Connection.Connected) will return connection status
 `ClearData("LocalGivenName")` afterwards to clean up too.
+
+`Search('source', text, column)`
