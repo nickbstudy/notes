@@ -21,7 +21,7 @@ There are 3 ways parameters can be passed:
 
 - **By Value** - Arguments passed by value give a copy and do not affect the original
 - **By Reference** - These assign the address of the original value to the parameter, and changes made in the function will be reflected in the original.  Reference parameters must include the `ref` keyword in the declaration and calls
-- **For Output** - Arguments passed 'for output' assign the memory address to be filled by the function/method.  This must include the `out` keyword in both its declaration and call.
+- **For Output** - Arguments passed 'for output' assign the memory address to be filled by the function/method.  This must include the `out` keyword in both its declaration and call.  You must declare the variable in the function, but it doesn't need to be declared before it is passed.
 
 Variables defined within a function only have local scope, and will not conflict with names of the same type elsewhere.
 

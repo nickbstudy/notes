@@ -1,6 +1,6 @@
 ### File IO
 
-The `System.IO.File` class library provides methods to easily write/read files on the system.  Paths must have a double backslash to escape the character.  If you are writing strings with multiple lines use `\r\n` as a line break (automatically happens between lines in arrays for `WriteAllLines`).
+The `System.IO.File` class library provides methods to easily write/read files on the system.  Paths must have a double backslash to escape the character, or you can use the @ sign to ignore escape sequences making it just, `@"C:\dev\FolderName"`  .  If you are writing strings with multiple lines use `\r\n` as a line break (automatically happens between lines in arrays for `WriteAllLines`).
 
 
 - `File.Exists()` takes one arg (the path) then returns a boolean if that file already exists.
@@ -44,3 +44,66 @@ using (StreamWriter sw = new StreamWriter(path, true))
 - `sr.Read()` reads one char at a time
 - `sr.ReadAllLines()` fills a string array with all lines
 - `sr.ReadAllText()` fills a string with whole file
+
+---
+
+More examples:
+
+```
+internal static void SaveEmployees(List<Employee> employees)
+        {
+            CheckForExistingEmployeeFile();
+            string path = $"{directory}{fileName}";
+            StringBuilder sb = new StringBuilder();
+            foreach (Employee employee in employees)
+            {
+                sb.Append($"firstName:{employee.FirstName};");
+                sb.Append($"lastName:{employee.LastName};");
+                sb.Append($"wage:{employee.Wage};");
+                sb.Append($"type:{GetEmployeeType(employee)};");
+                sb.Append(Environment.NewLine);
+            }
+            File.WriteAllText(path, sb.ToString());
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Saved successfully!");
+            Console.ResetColor();
+        }
+
+        internal static void LoadEmployees(List<Employee> employees)
+        {
+            string path = $"{directory}{fileName}";
+            if (File.Exists(path))
+            {
+                employees.Clear();
+
+                string[] employeesAsString = File.ReadAllLines(path);
+                for (int i = 0; i < employeesAsString.Length; i++)
+                {
+                    string[] employeeSplits = employeesAsString[i].Split(';');
+                    string firstName = employeeSplits[0].Substring(employeeSplits[0].IndexOf(":") + 1);
+                    string lastName = employeeSplits[1].Substring(employeeSplits[1].IndexOf(":") + 1);
+                    string wage = employeeSplits[2].Substring(employeeSplits[2].IndexOf(":") + 1);
+                    string type = employeeSplits[3].Substring(employeeSplits[3].IndexOf(":") + 1);
+                    
+
+                    Employee employee = null;
+
+                    if (type == "2")
+                    {
+                        employee = new Manager(firstName, lastName, double.Parse(wage));
+                    }
+                    else
+                    {
+                        employee = new Employee(firstName, lastName, double.Parse(wage));
+                    }
+
+                    employees.Add(employee);
+                }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Loaded {employees.Count} employees!");
+                Console.ResetColor();
+
+            }
+        }
+```

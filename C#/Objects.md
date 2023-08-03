@@ -1,4 +1,4 @@
-A class is a data structure that contains variables and functions (methods) collectively known as "members".  If not declared as `static` it can be used to create "instances" that are assigned to a variable for use by other classes.
+A class is a data structure that contains variables and functions (methods) collectively known as "members".  If not declared as `static` it can be used to create "instances" that are assigned to a variable for use by other classes.  `static` fields or methods can be accessed without an instance, but can only interact with other `static` items.
 
 Access to members from outside is controlled by "access specifiers" which will typically deny access to variable methods but allow access to methods that can get and set the data.  This technique of "data hiding" ensures that stored data is safely encapsulated.
 
@@ -56,6 +56,41 @@ public Dog(string name, string color, int age)
     this.age = age;
 }
 ```
+
+---
+### Properties
+To aid encapsulation you can set up properties as getters/setters for members in an object.  These can also help with validation.  These properties will be available for descendants of the class too.
+
+public class Employee
+{
+    private string name;
+    private int age;
+
+    public string Name
+    {
+        get { return name; }
+        set 
+        {
+            name = value;
+        }
+    }
+
+    public int Age
+    {
+        get { return age; }
+        set
+        {
+            if (value < 0)
+            {
+                age = 0;
+            }
+            else
+            {
+                age = value;
+            }
+        }
+    }
+}
 
 ---
 
@@ -139,7 +174,7 @@ A method in a derived class can be declared to hide a similar method in the base
 
 ---
 
-### Polymorphism
+### Polymorphism - allowing modification of base methods
 
 Base class methods can include the `virtual` keyword to indicate it can be overwritten in derivative classes by the `override` keyword.  The original can still be called with `base.originalMethod()`
 
