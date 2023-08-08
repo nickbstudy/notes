@@ -1,10 +1,12 @@
-### Creating
+## Arrays
+
+#### Creating
 ```
-int[] nums = new int[3];
+int[] nums = new int[3]; // fixed length
 string[] colors = {"red", "blue", "yellow"};
 ```
 
-### Multi-dimensionals
+#### Multi-dimensionals
 
 The square brackets must have a comma for each additional index, and the size must be a comma separated list:
 
@@ -19,3 +21,22 @@ Console.WriteLine($"X1, Y2: {arrName[1, 2]}");  // 6
 Getting length: `arrayName.Length;`
 Can use `foreach` loop to iterate over an array
 Length can not be changed after creation.
+
+---
+
+## Collections
+
+#### Lists
+
+Strongly typed, lists can be added to/deleted as required.  Declaring an int list:
+```
+List<int> employeeIds = new List<int>();
+employeeIds.Add(123);
+employeeIds.Add(234);
+int numEmployees = employeeIds.Count; // would be 2
+if(employeeIds.Contains(123))
+{
+    Console.WriteLine("123 is found!");
+}
+employeeIds.Clear(); // removes all elements
+```

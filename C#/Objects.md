@@ -57,6 +57,11 @@ public Dog(string name, string color, int age)
 }
 ```
 
+They are used to create the object.  An alternative way to instantiate the object without requiring a constructor is to pass the arguments in curly braces using a key value syntax during creation as follows:
+```
+Dog shah = new Dog() {Name = "Shah", Color = "Gold", age = 10}
+```
+
 ---
 ### Properties
 To aid encapsulation you can set up properties as getters/setters for members in an object.  These can also help with validation.  These properties will be available for descendants of the class too.
