@@ -1,4 +1,4 @@
-Interfaces are a framework for objects.  They contain empty method declarations with no access modifiers.  A class can implement multiple interfaces by separating them with commas.  The name should begin with `I` by convention.
+Interfaces are a framework for objects.  They can be considered a 'contract' for what methods must be implemented.  They contain empty method declarations with no access modifiers.  A class can implement multiple interfaces by separating them with commas.  The name should begin with `I` by convention.
 
 ```
 internal interface IEmployee

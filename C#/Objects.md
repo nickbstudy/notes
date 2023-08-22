@@ -181,7 +181,7 @@ A method in a derived class can be declared to hide a similar method in the base
 
 ### Polymorphism - allowing modification of base methods
 
-Base class methods can include the `virtual` keyword to indicate it can be overwritten in derivative classes by the `override` keyword.  The original can still be called with `base.originalMethod()`
+Base class methods can include the `virtual` keyword to indicate it can be overwritten in derivative classes by the `override` keyword.  The original can still be called with `base.originalMethod()` but by default the most specific one will be used based on the object called.
 
 ```
 Pidgeon joey = new Pidgeon();

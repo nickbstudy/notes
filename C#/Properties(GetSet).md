@@ -19,3 +19,6 @@ An even shorter way of declaring a property, which is logically the same as abov
 ```
 public string Name { get; set; }
 ```
+---
+### init;
+An alternative to `set;` is `init;` which will only allow setting in the constructor or when creating the object instance with {} notation, it will then be immutable.
