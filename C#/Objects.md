@@ -65,7 +65,7 @@ Dog shah = new Dog() {Name = "Shah", Color = "Gold", age = 10}
 ---
 ### Properties
 To aid encapsulation you can set up properties as getters/setters for members in an object.  These can also help with validation.  These properties will be available for descendants of the class too.
-
+```
 public class Employee
 {
     private string name;
@@ -96,7 +96,7 @@ public class Employee
         }
     }
 }
-
+```
 ---
 
 ### Inheritance

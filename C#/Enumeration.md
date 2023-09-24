@@ -1,6 +1,6 @@
 Implementing the interface `IEnumerable` will require you to have a `GetEnumerator()` method.  This must provide the item at the current index.  If you are working with a list, you can do it an easy way and return the lists `.GetEnumerator()` instead.  For example:
 
-```
+```csharp
 using System.Collections;
 
 class HeroAcademy : IEnumerable

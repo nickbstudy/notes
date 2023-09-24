@@ -1,6 +1,6 @@
 ### Constructors
 
-```
+```javascript
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -29,7 +29,7 @@ While functions can be declared in the object constructor, this will create a ne
 
 These are similar to constructors, but simply return an object when called, removing the requirement for the `new` keyword, and are considered more reliable.
 
-```
+```javascript
 const personFactory = (name, age) => {
     const sayHello = () => console.log('Hello!')
     return { name, age, sayHello }

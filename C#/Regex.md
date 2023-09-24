@@ -47,7 +47,7 @@ Used to specify how many instances of a char, group, or char class must occur wi
 
 #### Subexpressions
 
-Defined within a grouping construct, and used to extract substrings for separate processing or grouping subexpressions to apply a quantifier.  They may be capturing (for later use) or non-capturing (just for quantification).
+Defined within a grouping construct, and used to extract substrings for separate processing or grouping subexpressions to apply a quantifier.  They may be capturing (for later use) or non-capturing (just for quantification).  They can be named by including a name in `<>` at the start, e.g. `(?<name>)` and the name can be reused to keep items within a group.
 
 Subexpressions are defined within `(subex goes here)` or to make non-capturing `(?:subex goes here)
 `
@@ -61,3 +61,7 @@ var pattern = "(?:Az){3}";
 var match = Regex.Match("AzAzAz", pattern);  // True
 match = Regex.Match("AzAz", pattern);  // False - only 2 repetitions
 match = Regex.Match("AzWhateverAzAzAzAz", pattern);  // True, pattern is there 3+ times
+
+---
+
+If you are storing a regex pattern in a string and want to still have the formatting, add a comment line above it reading `//language=regex`
