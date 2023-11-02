@@ -10,4 +10,4 @@ MVC = Model View Controller.
 **Controller**
 
 Models are like the 'nouns'.  Controller controls where it enters but not what is being seen.  Views are based off models
-Keep in mind the distinction of 'list pages' and 'detail pages' - compared to a facebook feed vs a profile page
+Keep in mind the distinction of 'list pages' and 'detail pages' - compared to a facebook feed vs a profile page`
