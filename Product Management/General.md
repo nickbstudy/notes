@@ -13,7 +13,7 @@ Find and identifying opportunities.  The best information is gained from speakin
 
 ---
 
-#### Developing a strategy/roadmap ####
+#### Developing a strategy/roadmap 
 
 - **Theme** - the problem you're trying to solve.  Should be about the needs of the user, not features.
 - **Epic** - A group of features with one common goal.  A theme will generally have several epics
@@ -22,7 +22,7 @@ Find and identifying opportunities.  The best information is gained from speakin
 
 ---
 
-#### Product design ####
+#### Product design 
 
 Try prototyping before building the entire product.  Get feedback and refine from there.
 
