@@ -44,3 +44,10 @@ public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
 ```
 
 Don't forget to manually remove it in the add/update/delete methods using `_memoryCache.Remove(AllCategoriesCacheName);`
+
+
+---
+
+#### On page caching
+
+You can cache elements by using tag helpers - surround your method with `<cache>@Method.MightGetList</cache>`

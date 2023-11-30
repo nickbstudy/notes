@@ -32,6 +32,10 @@ When a model changes or is added/removed and the database needs to be updated to
 - `[DataType(DataType.EmailAddress)]`
 - `[Range(1, 100), ErrorMessage = "The value must be between 1 and 100."]`
 - Regular Expressions - e.g. to only allow digits: `[RegularExpression(@"^\d+$", ErrorMessage = "Only digits are allowed.")]`
+- `[BindNever]` - While not a validation attribute, when used on a model this indicates it is only there for utility, and should not be bound to in POST.
+
+`[ValidateAntiForgeryToken]` should be added to the top of the controller method to ensure data is coming from the right place too.
+`var formData = HttpContext.Request.Form;` on the POST method can be helpful to examine/debug details of the data being passed in too.
 
 #### Displaying validation errors to the user 
 
