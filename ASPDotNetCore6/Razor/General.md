@@ -37,3 +37,5 @@ Routing using the `Pages` folder as the root, and the file name and location wil
 | /contact | /Pages/contact.cshtml | 
 | /store/pies | /Pages/Store/pies.cshtml |
 | /store/pies/3 | /Pages/Store/pies.cshtml  `@page "{id:int?}"` |
+
+You can also customize the route if needed (maybe to avoid a clash with MVC) by setting `@page "/NewAddressHere"`

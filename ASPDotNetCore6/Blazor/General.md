@@ -4,6 +4,8 @@ Dependency injection is handled differently too; instead of a constructor you ju
 ```
 [Inject]
 public IPieRepository? PieRepository { get; set; }
+// then access like so:
+var allPies = PieRepository.GetAll();
 ```
 
 Requirements in Program.cs:
@@ -13,6 +15,11 @@ builder.Services.AddServerSideBlazor();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host"); //could change depending on address you want if only partially using
+```
+And in /Shared/_Layout.cshtml
+```
+<base href="~/" />
+<script src="_framework/blazor.server.js"></script>
 ```
 
 The file itself will have an address similar to razor, using `@page "/pagenamehere"`

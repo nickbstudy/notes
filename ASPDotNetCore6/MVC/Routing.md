@@ -29,6 +29,17 @@ app.MapControllerRoute(
     pattern: "/details/{productId}/{somethingElse?}");
 ```
 
+**To add a 404 page:**
+
+Add this below your routes:
+```
+app.MapControllerRoute(
+    "NotFound",
+    "{*url}",
+    new { Controller = "Error", Action = "Index" }
+);
+```
+
 ---
 
 #### Custom constraints
