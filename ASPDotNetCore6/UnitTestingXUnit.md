@@ -6,6 +6,8 @@ Most common types of tests:
 
 (MS TestHost & TestServer sometimes used?)
 
+NSubstitute - good option instead of Moq
+
 ---
 
 #### Unit Tests
