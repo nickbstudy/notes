@@ -15,3 +15,5 @@ Deployment (of a correct, secure product) is always the top priority.
 Secrets & Security don't belong in version control - they should be environment variables on a local machines, or secret variables in ADO.
 
 Set up an automatic build to fail if tests don't all pass.
+
+Pull requests should go through a senior developer before being merged into main/master
