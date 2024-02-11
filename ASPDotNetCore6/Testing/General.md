@@ -1,0 +1,3 @@
+To simplify testing you can use the same namespace by going into properties of the test project and changing the "Default Namespace" to match the main project.  This will automatically add a `<RootNamespace>` tag to represent this in the project configuration.
+
+You can use multiple asserts in one unit test if there are many possibilities to cover, it can be better than having repetitive tests and you see an error as to why it failed anyway.
