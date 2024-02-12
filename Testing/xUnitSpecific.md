@@ -7,7 +7,7 @@ Assert.EndsWith(expectedString, stringToCheck);
 // Some can also take optional params
 Assert.Equal(expectedString, actualString, ignoreCase: true);
 Assert.StartsWith(expectedString, stringToCheck, StringComparison.OrdinalIgnoreCase);
-````
+```
 #### Collections
 ```
 Assert.Contains(expectedThing, collection);
