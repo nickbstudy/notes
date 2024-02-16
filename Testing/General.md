@@ -1,3 +1,7 @@
+> *Test as little code as possible, as much as possible.*
+
+Tests should be idempotent (having the same effect even when executed multiple times).  This could involve setting up a new database and disposing it after each test.
+
 Most common types of tests:
 
 - **Unit Tests** - Should have low complexity, be fast, and well encapsulated.
@@ -7,6 +11,7 @@ Most common types of tests:
 (MS TestHost & TestServer sometimes used?)
 
 NSubstitute - good option instead of Moq?
+Tools can generate metrics on what percentage of our code is covered.
 
 ---
 

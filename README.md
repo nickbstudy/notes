@@ -1,4 +1,4 @@
-Symbols to copy:
+Mac Symbols to copy:
 
 
 ⌘

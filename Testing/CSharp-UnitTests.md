@@ -139,3 +139,7 @@ public void ShouldWriteOutputToConsole()
     Assert.Equal($"{item.CoffeeType}:{item.Count}{Environment.NewLine}", result);
 }
 ```
+---
+#### Bugfixing
+
+Always write a test to reproduce the error before trying to fix it - the process that created the defect once may do it again further down the road.
