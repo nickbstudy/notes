@@ -21,3 +21,27 @@
  `git log` gives full details of all commits (press Q to exit at end)
  `git log --oneline` gives a more concise list
  `git log --pretty="- %s"` Removes everything but the message (represented by the `%s` and can be customized, this example starts each line with a dash)
+
+ ---
+
+#### Tags
+
+Lightweight tags are simply a pointer to a specific commit, and can be added with `git tag yourtaghere`
+
+Annotated tags allow you to attach a note on tag details, and are stored as a full object in Git database, e.g. `git tag -a v1.2 -m "Updated template"`
+
+----
+
+#### Rolling back
+
+ `git reset --hard #commitSHA` 
+ Will need to work with other team members to merge changes, known as a 'rebase'
+
+ `git push --force`
+ Will remove commits past the last good one.  Good for removing files you didn't mean to upload
+
+ ----
+
+ #### Recovering
+
+ Search for branch by exact name to restore it.
