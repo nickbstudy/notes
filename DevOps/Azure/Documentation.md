@@ -1,0 +1,1 @@
+Version release notes should have a list of changes, then a brief, succinct description of each, and if applicable any next steps.  They should be readable by Joe Bloggs, not only a developer.
