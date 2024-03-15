@@ -1,0 +1,113 @@
+#### Mocking definition:  
+Replacing the actual dependency that would be used at production time, with a test-time-only version to enable easier isolation of the code we want to test.
+
+There are 4 different types of test doubles:
+
+- **Fakes** - Provide a working implementation of the dependency.  Not suitable for production (e.g. EF Core in-memory provider)
+- **Dummies** - Passed around, but never used/accessed.  Used to satisfy parameters where null isn't an option.
+- **Stubs** - Can provide answers to calls (could be prop gets, or method return values)
+- **Mocks** - Allow you to expect/verify calls to properties or methods.
+
+Moq allows us to create Dummies, Stubs, and Mocks.
+
+To create a simple mock dummy to pass as an argument where something is required (`mockThing` being whatever name you want to assign)
+
+```
+Mock<IYourInterfaceName> mockThing = new Mock<IYourInterfaceName>();
+var sut = new SomethingEvaluator(mockThing.Object)
+```
+
+**Note the `.Object` above - that is required to reference an object**
+
+
+##### MockBehavior
+Mocks can be either `Loose` or `Strict` (they are loose by default).  Loose mocks will return the default of value types, a null for reference types, and empty arrays or enumerables.  Strict mocks will throw and exception if a mocked method is called but has not been setup
+```
+Mock<IMockThing> mockThing = new Mock<IMockThing>(MockBehavior.Strict)
+```
+
+**Loose benefits:**
+Fewer lines of setup code
+Setup only what's relevant
+Less brittle tests
+Existing test continue to work if things change
+
+**Strict benefits:**
+More lines of setup code
+May have to setup irrelevant things
+Have to setup each called method
+More brittle tests
+Existing tests may break if things change
+
+---
+
+#### Mocking return values (parameter matching)
+
+After the Mock has been created, call the `Setup` method and either provide a lambda or use one of the `It` expressions to give a scenario, then the `.Returns()` to provide a result.  For example, to check if the `IsValid` method is provided `"test"` then return `true` :
+```
+mockThing.Setup(x => x.IsValid("test")).Returns(false)
+```
+Rather than specifying an explicit value, you can use the built in parameter matching methods:
+- `It.IsAny<T>` - matches anything of the given type `T`
+- `It.Is<string>(yourVar.StartsWith("a"))` - to allow for a predicate (a function returning a bool), obviously string and startswith can be changed as required
+- `It.IsInRange<string>("a", "z", Moq.Range.Inclusive)` - Allows anything in range (`Inclusive` can be swapped for `Exclusive`, which would only accept b-y).  `<string>` can be removed to make use of type inference too.
+- `It.IsIn("a", "b", "c")` - Accepts an IEnumerable or a params array of what will be matched
+- `It.IsRegex("[a-z]")` - Checks if the regex matches
+
+---
+
+#### Mocking `out` variables
+
+Declare a variable of the type required before the `Setup` method, then add it as a parameter:
+```
+bool isValid = false
+mockThing.Setup(x => x.MethodName(out isValid));
+```
+
+---
+
+#### Mocking properties
+
+Similar to configuring methods, provide a labmda for the property name and a return value.
+
+`mockThing.Setup(x => x.PropertyNameHere).Returns("THEMOCK");`
+
+This can also be a local function (useful if you need to get data from somewhere else)
+```
+[Fact]
+{
+    var mockThing = new Mock<ThingToMock>
+    mockThing.Setup(x => x.PropName).Returns(ExternalThing);
+
+    var sut = new ThingImTesting(mockThing.Object);
+
+    var application = new CreditCardApplication { Money = 20000 };
+
+    CreditCardApplicationDecision decision = sut.Evaluate(application);
+
+    Assert.Equal(CredicCard)
+}
+
+string ExternalThing() 
+{
+    // e.g. read from external file
+    return "Result";
+}
+```
+
+**Specifying default behavior for Loose Mocks**
+
+If you need to mock an reference type with something other than null (only permissible for interfaces, abstract classes, or non-sealed classes) use:
+```
+mockThing.DefaultValue = DefaultValue.Mock
+```
+
+**Tracking changes to Mock Property Values**
+
+By default, changes made to mocked properties will not be retained.  If you need a single one to be retained use
+```
+mockThing.SetupProperty(x => x.PropToRetainHere)
+```
+Or to retain all changes to all properties use `mockThing.SetupAllProperties();`
+
+Note that this should be done before any individual property assignments, or it will cause a null pointer exception

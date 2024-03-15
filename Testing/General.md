@@ -13,6 +13,20 @@ Most common types of tests:
 
 NSubstitute - good option instead of Moq?
 Tools can generate metrics on what percentage of our code is covered.
+`var` is often called `sut` - short for "System Under Test"
+
+---
+
+#### Test Doubles
+
+There are 4 different types of test doubles:
+
+- **Fakes** - Provide a working implementation of the dependency.  Not suitable for production (e.g. EF Core in-memory provider)
+- **Dummies** - Passed around, but never used/accessed.  Used to satisfy parameters where null isn't an option.
+- **Stubs** - Can provide answers to calls (could be prop gets, or method return values)
+- **Mocks** - Allow you to expect/verify calls to properties or methods.
+
+Moq allows us to create Dummies, Stubs, and Mocks.
 
 ---
 
