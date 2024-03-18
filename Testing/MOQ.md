@@ -54,6 +54,13 @@ Rather than specifying an explicit value, you can use the built in parameter mat
 - `It.IsIn("a", "b", "c")` - Accepts an IEnumerable or a params array of what will be matched
 - `It.IsRegex("[a-z]")` - Checks if the regex matches
 
+If you need to have multiple calls in the function, instead use `SetupSequence` then chain on returns as required:
+```
+mockThing.Setup(x => x.IsAny<string>)
+    .Returns(false)
+    .Returns(true);
+```
+
 ---
 
 #### Mocking `out` variables
@@ -111,3 +118,58 @@ mockThing.SetupProperty(x => x.PropToRetainHere)
 Or to retain all changes to all properties use `mockThing.SetupAllProperties();`
 
 Note that this should be done before any individual property assignments, or it will cause a null pointer exception
+
+---
+
+#### State vs Behavior testing
+
+State testing is looking at properties and values, whereas behavior testing is for checking if a method was run or a property was accessed.  
+
+#### Behavior testing:
+
+**Verifying a method was called**
+
+Calling the method `mockThing.Verify(x => x.MethodName("params"));` will only allow the test to pass if the mock was called with the specified parameters (or omit for none).  You can also use Is.Any<T> etc instead of specific parameters.  Custom error messages can be added with an overload of a string of the error message you want.
+
+You can check how many times it was called with an overload struct `Times` with options such as `Once` `Never` and `Exactly(42)`
+
+**Verifying a Property Getter or Setter was called**
+
+Similar pattern to above, but we use `mockThing.VerifyGet(x => x.PropertyNameHere)` also with struct `Times` overload.
+
+To check for a setter call use `mockThing.VerifySet(x => x.Prop = "new value");` - also works with `It.Is<T>` etc as the new value, and the `Times` overload.
+
+Finally, a method of `mockThing.VerifyNoOtherCalls()` exists to ensure nothing else gets invoked.
+
+---
+
+#### Other Moq techniques
+
+**Throwing Exceptions from Mocks**
+
+Use `mockThing.Setup` but instead of `.Returns` use `.Throws<Exception>();` (or a more specific exception if required).  You can include a message with `.Throws(new Exception("Message here"));`
+
+**Checking a Mock was called multiple times with different values**
+
+Create a list to capture to, `Setup` the mock to use `Capture.In(yourList)` then `Assert.Equal()` with that.
+
+```
+Mock<ILetters> mockThing = new Mock<ILetters>
+
+var thingsToCheck = new List<string>();
+mockThing.Setup(x => x.IsValid(Capture.In(thingsToCheck)));
+
+var sut = new SystemUnderTestThingee(mockThing.Object);
+
+sut.AddStuff("aa");
+sut.AddStuff("bb");
+sut.AddStuff("cc");
+
+Assert.Equal(new List<string> {"aa", "bb", "cc"}, thingsToCheck)
+```
+
+**Mocking members of concrete types with partial mocks**
+
+If you need to mock a class without an interface, simply make it virtual.
+
+**LINQ Style**
