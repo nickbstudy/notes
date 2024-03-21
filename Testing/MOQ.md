@@ -172,4 +172,62 @@ Assert.Equal(new List<string> {"aa", "bb", "cc"}, thingsToCheck)
 
 If you need to mock a class without an interface, simply make it virtual.
 
-**LINQ Style**
+**LINQ Style formatting**
+
+You can also declare using a LINQ style of formatting, for example instead of
+```
+Mock<IFrequentFlyerNumberValidator> mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+mockValidator.Setup(x => x.ServiceInformation.License.LicenseKey).Returns("OK");
+mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Returns(true);
+```
+you can use:
+```
+IFrequentFlyerNumberValidator mockValidator = Mock.Of<IFrequentFlyerNumberValidator>
+    (
+        validitor => 
+        validitor.ServiceInformation.License.LicenseKey == "OK" &&
+        validitor.IsValid(It.IsAny<string>()) == true
+    );
+```
+
+**Utilizing the constructor & DRY coding**
+
+If many tests are using the same object, as with other fields you can declare them as private then set them up in a constructor:
+```
+private Mock<IMockThing> mockThing;
+private SomeEvaluatorThing sut;
+
+public NameOfYourTestSuite()  // constructor
+{
+    mockThing = new Mock<IMockThing>();
+    mockThing.SetupAllProperties;
+    mockThing.Setup(x => x.Info.License.LicenseKey).Returns("P2Y4C-2TBK9");
+    mockThing.Setup(x => x.IsValid(It.IsAny<string>())).Returns(true);
+}
+
+[Fact]
+// etc...
+```
+
+**Mocking Async method return values**
+
+To mock the following interfaces with async such as:
+```
+public interface IDemoInterfaceAsync
+{
+    Task StartAsync();
+    Task<int> StopAsync;
+}
+```
+
+Set up like this:
+
+```
+var mock = new Mock<IDemoInterfaceAsync>();
+mock.setup(x => x => x.StartAsync()).Returns(Task.CompletedTask);
+
+// or for the call with a return value:
+mock.Setup(x => x.StopAsync()).Returns(Task.FromResult(42));
+// or a shorter way of writing this:
+mock.Setup(x => x.StopAsync()).ReturnsAsync(42);
+```
