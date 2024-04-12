@@ -17,7 +17,7 @@ A more modern, less verbose way of doing this is simply `app.MapControllers();`
 
 Then in the controller, above the class declaration:
 ```
-[ApiController]
+[ApiController] // helps with responses etc
 [Route("api/cities")]
 public class CitiesController : ControllerBase
 {
@@ -141,3 +141,5 @@ There are many ways to accept input to an API:
 - **`[FromRoute]`** - Route data from the current request
 - **`[FromServices]`** - The service(s) injected as action parameter
 - **`[AsParameters]`** - Method parameters
+
+Typically for an API you will use body, header, query, and route.
