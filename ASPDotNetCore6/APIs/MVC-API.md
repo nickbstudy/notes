@@ -137,9 +137,141 @@ There are many ways to accept input to an API:
 - **`[FromBody]`** - Request body
 - **`[FromForm]`** - Form data in the request body
 - **`[FromHeader]`** - Request header
-- **`[FromQuery]`** - Query string parameters
+- **`[FromQuery]`** - Query string parameters - not always required as using `[ApiController]` implies string arguments are these, but for clarity you could use this as:
+```
+public async Task<IActionResult> GetCity([FromQuery] string? name)
+```
 - **`[FromRoute]`** - Route data from the current request
 - **`[FromServices]`** - The service(s) injected as action parameter
 - **`[AsParameters]`** - Method parameters
 
 Typically for an API you will use body, header, query, and route.
+
+---
+
+#### Global Exception Handling
+
+In Program.cs, before registering anything else in the HTTP request pipeline:
+```
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler();
+}
+```
+
+And in the service registration: `builder.Services.AddProblemDetails();`
+
+This prevents sending a full stack trace, but gives a clean 500 and "something went wrong" error.  Full details will still be in the logger.
+
+---
+
+#### Filtering & Searching
+
+**Filtering** a collection means limiting the collection taking into account a predicate.  For example, `/api/things?name=Test` will only return results where the "name" field matches "Test".  It allows you to be precise by adding filters until you get exactly the results you want.
+
+**Searching** a collection means adding matching items to the collection based on a predefined set of rules.  These may be different for each case; it's up to the API to decide how to implement this functionality.  It allows you to go wider, and is used when you don't know exactly which items will be in the collection
+
+A repository implementing both might look like:
+
+```
+public async Task<IEnumerable<City>> GetCitiesAsync(string? name, string? searchQuery)
+{
+    if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(searchQuery)) return await GetCitiesAsync();
+
+    var collection = _context.Cities as IQueryable<City>;
+
+    if (!string.IsNullOrWhiteSpace(name))
+    {
+        name = name.Trim();
+        collection = collection.Where(c => c.Name == name);
+    }
+
+    if (!string.IsNullOrWhiteSpace(searchQuery))
+    {
+        searchQuery = searchQuery.Trim();
+        collection = collection.Where(c => c.Name.Contains(searchQuery) || (c.Description != null && c.Description.Contains(searchQuery)));
+    }
+
+    return await collection.OrderBy(c => c.Name).ToListAsync();
+}
+```
+
+Note that the `IQueryable<City>` is being created first for filters to be applied to, before it is run, ensuring efficient queries.
+
+
+#### Paging
+
+Limit the page size (a `const int` on the controller is fine), and return first page by default.  Paging needs to be done on the repository with deferred execution (`IQueryable`).  The controller should take `int page = 1, int pageSize = 10` (or however many you want) as arguments, it is important to add those defaults.  Implementing this in the repository is as simple as changing the return statements.  Instead of the above :
+
+```
+// without paging
+return await collection.OrderBy(c => c.Name).ToListAsync();
+```
+
+You include pageNumber and pageSize in the repository and return:
+```
+return await collection
+    .OrderBy(c => c.Name)
+    .Skip(pageSize * (pageNumber - 1))
+    .Take(pageSize)
+    .ToListAsync();
+```
+
+Also, in the filtering example above you should remove the check for no filters to return all cities, as that would violate the max values.
+
+---
+
+#### Returning Pagination Metadata
+
+It can be beneficial to the user to get an indication of the pagination results, however this doesn't belong in the JSON body response.  A good solution is to instead add it to the header.  A simple way to execute this is creating a class to hold this data:
+
+```
+public class PaginationMetadata
+{
+    public int TotalItemCount { get; set; }
+    public int TotalPageCount { get; set; }
+    public int PageSize { get; set; }
+    public int CurrentPage { get; set; }
+
+    public PaginationMetadata(int totalItemCount, int pageSize, int currentPage)
+    {
+        TotalItemCount = totalItemCount;
+        PageSize = pageSize;
+        CurrentPage = currentPage;
+        TotalPageCount = (int)Math.Ceiling(totalItemCount / (double)pageSize);
+    }
+}
+```
+
+And instead of your repository returning a `Task<IEnumerable<Thing>>` have it return a tuple including the metadata: `Task<(IEnumerable<Thing>, PaginationMetadata)>`
+
+Tagging on to the above examples, the final return statement would be replaced with:
+```
+var totalItemCount = await collection.CountAsync();
+
+var paginationMetadata = new PaginationMetadata(totalItemCount, pageSize, pageNumber);
+
+var collectionToReturn = await collection
+    .OrderBy(c => c.Name)
+    .Skip(pageSize * (pageNumber - 1))
+    .Take(pageSize)
+    .ToListAsync();
+
+return (collectionToReturn, paginationMetadata);
+```
+
+Then in your controller:
+
+```
+var (cityEntities, paginationMetadata) = await _cityInfoRepository.GetCitiesAsync(name, searchQuery, pageNumber, pageSize);
+
+Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+```
+
+---
+
+## <u>Security</u>
+
+#### Token-based security
+
+
