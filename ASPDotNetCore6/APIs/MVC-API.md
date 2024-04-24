@@ -28,7 +28,7 @@ public class CitiesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<CityDto> GetCity(int id)
+    public ActionResult<CityDto> GetCity(int id)  // you could also use IActionResult, but the more specific version will help documentation in Swagger
     {
         var cityToReturn = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == id);
         if (cityToReturn == null) return NotFound();
@@ -273,5 +273,7 @@ Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata
 ## <u>Security</u>
 
 #### Token-based security
+
+Use JWT - just watch the video again for details...
 
 
