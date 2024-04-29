@@ -57,3 +57,30 @@ Be cautious of using aggregate methods when you have this enabled, as it will lo
 
 Another common mistake is lazy loading when no context is in scope.  If the request is made after the context has been disposed an exception will be thrown.
 
+---
+
+#### Chaining `Include` Requests
+
+If you have multiple related tables you want to include in your query, use the `.ThenInclude` method.  Beware this can cause high load if there is a lot of data.  An example of retrieving and working with this data:
+
+```
+var authorGraph = _context.Authors.AsNoTracking()
+        .Include(a => a.Books)
+        .ThenInclude(b => b.Cover)
+        .ThenInclude(c => c.Artists)
+        .FirstOrDefault(a => a.AuthorId == 1);
+
+Console.WriteLine(authorGraph?.FirstName + " " + authorGraph?.LastName);
+foreach (var book in authorGraph.Books)
+{
+    Console.WriteLine("Book:" + book.Title);
+    if (book.Cover != null)
+    {
+        Console.WriteLine("Design Ideas: " + book.Cover.DesignIdeas);
+        Console.Write("Artist(s):");
+        book.Cover.Artists.ForEach(a => Console.Write(a.LastName + " "));
+
+    }
+}
+```
+
