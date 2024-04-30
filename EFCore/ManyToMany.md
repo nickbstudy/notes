@@ -75,6 +75,9 @@ Essentially a DB with 2 x one-to-many relationships, and its own set of properti
 
 ---
 
-Be cautious of recursive data - especially when serializing. ==more detail to come?==
-
-
+Be cautious of recursive data - especially when serializing.  If this will be an issue accessing data you can warn the compiler in Program.cs using:
+```
+builder.Services.AddControllers()
+        .AddJsonOptions(opt => opt.JsonSerializerOptions.ReferenceHandler=ReferenceHandler.IgnoreCycles);
+```
+This will stop a request getting into an infinite loop getting the artist of a cover of an artist of a cover etc.
