@@ -28,7 +28,7 @@ ControllerBase gives some helper methods to simplify responses:
 
 - `Ok()` 200 - successful request, add content as arguments
 - `JsonResult()` 200 and forces JSON to be used
-- `BadRequest()` 400?
+- `BadRequest()` 400 - Malformed request.
 - `NotFound()` 404
 - `NoContent()` 204 - Typically sent as a response to POST when something has been done and no further communication is required.
 

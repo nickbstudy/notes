@@ -3,4 +3,11 @@ Delegates are a reference type used to invoke a method.  They are declared in a 
 public delegate void OpDelegate(int First, int Second);
 ```
 
-Any static or non-static method that conforms to the declared signature can be used as a delegate.  Some examples of 
+Any static or non-static method that conforms to the declared signature can be used as a delegate.
+
+- Creating and using a void
+- Return values and parameters
+- Multicast delegates and chains ( += )
+- Action & Func
+Action = a void delegate
+Func a delegate with a return

@@ -1,4 +1,4 @@
->*"DevOps represents a change in IT culture, focusing on rapid IT service delivery through the adoption of agile, lean practices in the context of a system-oriented approach."
+>"DevOps represents a change in IT culture, focusing on rapid IT service delivery through the adoption of agile, lean practices in the context of a system-oriented approach."
 *\- Gartner Research*
 
 >"DevOps is the combination of cultural philosophies, practices, and tools that increases an organizations ability to delivery applications and services at high velocity."
