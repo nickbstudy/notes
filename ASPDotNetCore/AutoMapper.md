@@ -13,7 +13,7 @@ public class MappingProfile : Profile
 
 Now in Program.cs add:
 ```
-services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 ```
 (might be able to tidy that up?)
 
