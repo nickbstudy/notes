@@ -26,7 +26,7 @@ public CategoryRepository(BethanysPieShopDbContext bethanysPieShopDbContext, IMe
 
 Then the method to get all categories:
 
-```
+```c#
 public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
 {
     List<Category> allCategories = null;

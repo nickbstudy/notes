@@ -20,7 +20,7 @@ VALUES ('John', '2024-06-11', TRUE),
 
 #### Update
 Technically a `WHERE` clause is not required, but this should almost always be included - otherwise changes will be applied to the entire table.
-```
+```sql
 UPDATE Employee
 SET Status = 'Retired', Salary = 0, DepartmentID = NULL
 WHERE EmployeeID = 6543;
@@ -39,4 +39,4 @@ WHERE ProductID IN (12345, 12346, 12349);
 ```
 ==**USE WITH CAUTION! THIS WILL DELETE ALL ROWS WITHOUT A WHERE CLAUSE!**==
 
-A good practice is to first write the query as a select, to ensure you are only getting the rows you want, then turn that into a delete.
+A good practice is to first write the delete query as a select just to ensure you are only getting the rows you want, then turn that into a delete. 
