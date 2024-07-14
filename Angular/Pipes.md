@@ -1,0 +1,1 @@
+Pure pipes (built in ones) run at first render, impure (custom built) run at every render cycle, so can easily create peformance issues.  Be cautious with them.
