@@ -1,4 +1,0 @@
-Method Decorators are a function that returns another function that should be executed instead of the existing class definition.  It can completely replace it, but more commonly changes a feature of it.
-
-```
-function(target)
