@@ -22,17 +22,16 @@ Common uses are
 In the simplest form they are a function which is applied to code.
 
 ```
-function myDecorator(target, context) {  // target is whatever the decorator is applied to, context
-    const writeSomething = function (this: any, ...args: any[]) {
-        console.log('snuck in there...');
-        target.apply(this, args);
+function myDecorator(target: Function, context: ClassMethodDecoratorContext) {  // target is the type you're decorating, context gives information about it
+    const writeSomething = function (this: any, ...args: any[]) {  // this will give access to the object you're decorating, ...args: any[] brings the args
+        console.log(`snuck in before ${context.name.toString()} could run`);  
+        target.apply(this, args);  // target.apply calls the specified function (typically this), substituting the arguments for the 2nd parameter.
     }
-    return writeSomething;
+    return writeSomething;  // have to return the function to be used to decorate the target.
 }
 
 class BasicThing {
-
-    @myDecorator
+    @myDecorator      // myDecorator will wrap itself around this function
     publishLine() {
         console.log('This is a line');
     }
@@ -41,6 +40,9 @@ class BasicThing {
 let theThing = new BasicThing();
 theThing.publishLine();
 
+// output: snuck in before publishLine could run
+//         This is a line
+```
 ---
 
 #### Method Decorators

@@ -1,0 +1,2 @@
+These receive and optionally return a new class.  They can record metadata, modify them, or execute code on instance creation etc.
+
