@@ -1,0 +1,1 @@
+Store all images in `./assets/images` then html is `<img src="/assets/images/pic.png" /> (controlled by angular.json "assets")
