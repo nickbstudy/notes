@@ -1,5 +1,6 @@
 `ng generate component new-components-name`
 `ng generate component folder/name`
+`ng g c component-name` for short.
 
 Generated folder will contain .css .html .spec.ts and .ts files (.spec.ts is for testing).  Best naming practices are used, for a component called 'new' these are:
 
@@ -55,3 +56,40 @@ R AfterViewChecked
 ```
 
 To add them to a component (using OnInit as an example here) add the required hook in the `import` brackets, extend `export class YourComponent` with ` implements OnInit`, and include in the class a method of `ngOnInit(): void { // your code }` (note the **`ngOnInit`** prefix in the method)
+
+---
+
+#### Communicating between child/parent components
+**Sending data to a child:**
+Parents HTML:
+```
+<ul class="products">
+  <li class="product-item" *ngFor="let singleProduct of getFilteredProducts()">
+    <bot-product-details [product]="singleProduct"></bot-product-details>
+  </li>
+</ul>
+```
+Childs TS: Add a matching property to its class definition, decorated with @Input() (will need to import Input from @angular/core):
+```
+export class ProductDetailsComponent {
+  @Input() product!: IProduct
+}
+```
+
+**Sending data to a parent:**
+The childs TS class needs an `@Output() anyName = new EventEmitter()` (can have multiple if required) and a method to `emit()` (which can include data if necessary, but not shown in this example) like so:
+```
+export class ProductDetailsComponent {
+  @Output() buy = new EventEmitter()
+
+  buyButtonClicked(product: IProduct) {
+    this.buy.emit();
+  }
+}
+```
+Then the parent HTML component declaration watches like this:
+```
+<li class="product-item" *ngFor="let product of getFilteredProducts()">
+  <bot-product-details [product]="product" (buy)="addToCart(product)"></bot-product-details>
+</li>
+```
