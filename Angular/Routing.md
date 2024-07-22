@@ -51,4 +51,12 @@ Add to the constructor of the component `private router: Router` (with the relev
 
 Add to the `app-routing.modules.ts` file at the end of your route `/:something` to indicate that will be a route parameter (you can have more than 1).  An example of a route with a filter parameter:
 `{ path: 'catalog/:filter', component: CatalogComponent, title: "Catalog" },`
-Then in the receiving component inject `private route: ActivatedRoute` and the relevant import.  You can then access the route through `this.route.snapshot.params['filter']`
+Then in the receiving component inject `private route: ActivatedRoute` and the relevant import.  You can then access the route (typically in `ngOnInit`) through `this.route.snapshot.params['filter']`'
+
+#### Query string parameters
+
+To pass parameters in a link add `[queryParams]="{filter: 'Something'}"` to the `<a>` tag.  To access these use `this.route.snapshot.queryParams['filter']`
+
+#### Styling the active route
+
+Angular has a built in method for this; where there is a list of links add `routerLinkActive="class-here"` and that class will be applied when it is active.  To do the same for sets of query parameters, add above to each.  If you need specificity add `[routerLinkActiveOptions]="{ exact: true }"` - useful for an 'All' filter option (otherwise the routerLinkActive checks for startsWith and will always trigger 'all').
