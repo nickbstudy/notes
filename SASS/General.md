@@ -13,20 +13,24 @@ Organizing can be done with the [SASS 7-1 pattern](https://sass-guidelin.es/#the
 
 #### Variables
 \- and _ are treated the same.  Prefix with a $
-They can hold all kinds of values, including , and value maps like this:
+They can hold all kinds of values (numbers, hex codes, etc), arrays (separated by a space or comma), and value maps like this:
 ```
+// Variable declarations
 $red: #FF595E;
 $blue: #0A2463;
 $yellow: #F9CB40;
+
+// Variable array declaration:
+$cursors: pointer auto inherit;
 
 // SASS Map
 $theme-colors: (
     "primary": $red,
     "secondary": $blue,
     "warning": $yellow
-);
+);  // don't forget the trailing ; here
 
-Cycle maps with this syntax:
+Cycle through maps with this syntax:
 ```
 @each $color, $value in $theme-colors {
   .btn-#{$color} {    // this is how to interpolate the string.
@@ -44,6 +48,8 @@ $cursors: pointer auto inherit;
     }
 }
 ```
+
+The above is similar to how Bootstrap works, and would allow you to add a class of btn-primary etc to an HTML element for styling.
 
 #### Mixins
 
@@ -71,4 +77,11 @@ Gives a way to duplicate reusable CSS chunks, kept in the `abstracts` folder.  C
 ```
 
 #### Functions
+Similar to a mixin, but it returns a single value rather than a collection of lines.  Can also take in lines
 
+```
+@function lighten-color($color) {
+  $complement: complement($color);  // built in SASS variable to get a complementing color
+  $light-complement: lighten($complement);
+  @return $light-complement;
+}
