@@ -1,0 +1,1 @@
+Reactive forms validation is defined in the class.  If using form builder make the construction arguments an array, then everything after the initiator is validation: `firstName: ['', Validators.required],`
