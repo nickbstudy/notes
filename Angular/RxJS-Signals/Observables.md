@@ -31,3 +31,7 @@ this.subFrom = from([1, 2, 3, 4]).subscribe({
     complete: () => console.log(`no nums left`)
 })
 ```
+
+#### Pipes
+
+Pipes can be put between the observer and `subscribe()` to allow manipulation of data, such as filter, tap(used to log to console), take(number here), and many others - list is on RxJS documentation site

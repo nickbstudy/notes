@@ -42,7 +42,7 @@ Then in `angular.json` find the `"serve"` key, and under `"development"` create 
 
 #### HTTP Requests
 
-HTTP Requests are best made from a service method, rather than a component itself, to improve reusability and separation of concerns.  When you implement HTTP requests you also need to update `app.module.ts` inside `@NgModule` add to the array of `imports:` a mention of `HttpClientModule`.
+**HTTP Requests are best made from a service method, rather than a component itself, to improve reusability and separation of concerns**.  When you implement HTTP requests you also need to update `app.module.ts` inside `@NgModule` add to the array of `imports:` a mention of `HttpClientModule`.
 
 Add this to the class constructor: `private http: HttpClient` and make sure you import it:
 `import { HttpClient } from '@angular/commmon/http'`

@@ -14,3 +14,5 @@ RxJS = Reactive Extensions for JavaScript.
 - Reacts to those notifications - no values held, they are emitted over time.
 - Good for HTTP GET/POST
 - Retrieving and merging related sets of data
+
+
