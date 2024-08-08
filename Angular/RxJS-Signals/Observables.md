@@ -1,10 +1,21 @@
-Suffix with a $ to indicate a variable is an `observable` and requires subscribing.
+#### Observables
 
-Emits 3 callback functions: 
-`next: item => ...`
+Observables are a collection of events of data values emitted over time.  They are created from an event or data source
+- User actions
+- Application events (routing, forms)
+- Response from an HTTP request
+- Internal structures
+
+Suffix variables with a $ to indicate it is an `observable` and requires subscribing.
+
+They emit 3 callback functions: 
+`next: item => ...` - `item` can be anything such as primitives, events, objects, an array, observable, or http response
 `error: err => ...`
 `complete: () => ...` 
-Shown above as lambdas, but they could be functions defined somewhere else.
+
+They can be synchronous or asynchronous (depending on the behaviour of the source), and have finite or infinite emissions.  The above examples are lambdas but they could even be a function defined elsewhere.
+
+---
 
 If you subscribe you should always unsubscribe later too (typically in `ngOnDestroy`), to help prevent bugs and memory leaks.
 

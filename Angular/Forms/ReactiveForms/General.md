@@ -1,5 +1,4 @@
-Add all this to a project by importing in `app.module.ts` the `ReactiveFormsModule`
-
+Add all this to a project by importing in `app.module.ts` the `ReactiveFormsModule` (or for standalone just add that in the components import)
 
 Each field needs to know:
 - Input Value
