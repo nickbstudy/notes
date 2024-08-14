@@ -1,0 +1,9 @@
+```
+[Route("api/[controller]")]
+[ApiController]
+public class CitiesController : ControllerBase
+{
+    [HttpGet]
+    // etc
+}
+```
