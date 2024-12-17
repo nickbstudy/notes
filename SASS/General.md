@@ -2,7 +2,7 @@
 File naming:  SCSS or SASS.  SCSS looks like normal CSS, SASS looks unfamiliar.
 Gets compiled to /dist/*.css (unless you use a bundler like Parcel)
 
-#### Partials
+### Partials
 Allow you to store CSS in smaller chunks, by the type of code it is, for example putting all the buttons styles together.  File names should start with an underscore.  To bring in, use either `@import` or `@use` - older compilers might not support `@use`.  Syntax to import is `@import './filename';` - not there is no leading _ or file extension.
 
 `@import` always shares everything globally (variables etc), also used by bootstrap, probably a better choice
@@ -11,7 +11,7 @@ Allow you to store CSS in smaller chunks, by the type of code it is, for example
 
 Organizing can be done with the [SASS 7-1 pattern](https://sass-guidelin.es/#the-7-1-pattern) so each partial is in another folder and the `main.scss` just references all of them.
 
-#### Variables
+### Variables
 \- and _ are treated the same.  Prefix with a $
 They can hold all kinds of values (numbers, hex codes, etc), arrays (separated by a space or comma), and value maps like this:
 ```
@@ -29,6 +29,7 @@ $theme-colors: (
     "secondary": $blue,
     "warning": $yellow
 );  // don't forget the trailing ; here
+```
 
 Cycle through maps with this syntax:
 ```
@@ -40,6 +41,7 @@ Cycle through maps with this syntax:
 }
 ```
 Or if it's just a list:
+```
 $cursors: pointer auto inherit;
 
 @each $cursor in $cursors {
@@ -51,7 +53,7 @@ $cursors: pointer auto inherit;
 
 The above is similar to how Bootstrap works, and would allow you to add a class of btn-primary etc to an HTML element for styling.
 
-#### Mixins
+### Mixins
 
 Gives a way to duplicate reusable CSS chunks, kept in the `abstracts` folder.  Can take arguments.  Usage:
 
@@ -76,7 +78,7 @@ Gives a way to duplicate reusable CSS chunks, kept in the `abstracts` folder.  C
 }
 ```
 
-#### Functions
+### Functions
 Similar to a mixin, but it returns a single value rather than a collection of lines.  Can also take in lines
 
 ```
