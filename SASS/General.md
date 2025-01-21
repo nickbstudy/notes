@@ -87,3 +87,28 @@ Similar to a mixin, but it returns a single value rather than a collection of li
   $light-complement: lighten($complement);
   @return $light-complement;
 }
+```.
+
+### Interpolation
+
+### Each
+Equivalent of a `for each` in other languages.  Loops over lists - an example would be:
+
+```
+$socialMediaColors: 
+	1 #3B5998, 
+	2 #B31217, 
+	3 #DC4E41, 
+	4 #55ACEE, 
+	5 #517FA4, 
+	6 #0077B5;
+
+@each $color in $socialMediaColors {
+	.social-icons-item:nth-child(#{nth($color, 1)}) .social-icons-link {
+		color: nth($color, 2);
+		border: .1rem solid nth($color, 2);
+	}
+}
+```
+
+Here the `#{nth($color, 1)}` and `#{nth($color, 2)}` are referring to the first and second part of the key/value pair.

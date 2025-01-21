@@ -46,4 +46,88 @@ Separates an IEnumerable into arrays of the size specified in `.Chunk()`
 list = products.Chunk(5).ToList();
 ```
 
+---
 
+#### Joins
+
+Query syntax is typically easier for these.  An example is:
+
+```
+public async Task<IEnumerable<SubAreaDto>> GetSubAreasForPlantAsync(string plantCode)
+{
+	return await (
+		// Start with PlantAreas table
+		from area in _context.PlantAreas
+		// Filter for the specific plant code we want
+		where area.PlantAreaMajorCode == plantCode
+		// Join with PlantAreaSubs table
+		join sub in _context.PlantAreaSubs
+			// Match PlantAreaCode from both tables
+			on area.PlantAreaCode equals sub.PlantAreaCode
+		// Order the results
+		orderby area.PlantAreaCode, sub.PlantAreaSubCode
+		// Create our DTO with the fields we want
+		select new SubAreaDto(
+			area.PlantAreaCode,
+			sub.PlantAreaSubCode,
+			sub.PlantAreaSubDesc ?? ""
+		)
+	).ToListAsync();
+}
+```
+
+Let's break down what's happening step by step:
+
+`from area in _context.PlantAreas`
+
+This starts our query from the PlantAreas table
+We give each row the alias 'area'
+
+`where area.PlantAreaMajorCode == plantCode`
+
+Filters the PlantAreas table to only include rows matching our plant code
+This happens before the join to reduce the amount of data we're joining
+
+`join sub in _context.PlantAreaSubs`
+
+Tells EF Core we want to combine data from PlantAreaSubs
+Each row from this table gets the alias 'sub'
+
+`on area.PlantAreaCode equals sub.PlantAreaCode`
+
+This is our join condition
+Only rows where these codes match will be included in the result
+This replaces our foreach loop by doing the matching in the database
+
+`orderby area.PlantAreaCode, sub.PlantAreaSubCode`
+
+Orders the results first by plant area, then by sub area
+This happens in the database rather than in memory
+
+`select new SubAreaDto(...)`
+
+Creates our DTO objects from the joined data
+We can access fields from both tables since they're joined
+
+Here's the same query in method syntax if you prefer that style:
+
+```
+public async Task<IEnumerable<SubAreaDto>> GetSubAreasForPlantAsync(string plantCode)
+{
+	return await _context.PlantAreas
+		.Where(area => area.PlantAreaMajorCode == plantCode)
+		.Join(
+			_context.PlantAreaSubs,
+			area => area.PlantAreaCode,
+			sub => sub.PlantAreaCode,
+			(area, sub) => new SubAreaDto(
+				area.PlantAreaCode,
+				sub.PlantAreaSubCode,
+				sub.PlantAreaSubDesc ?? ""
+			)
+		)
+		.OrderBy(dto => dto.PlantAreaCode)
+		.ThenBy(dto => dto.SubAreaCode)
+		.ToListAsync();
+}
+```
