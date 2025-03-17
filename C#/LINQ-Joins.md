@@ -131,3 +131,59 @@ public async Task<IEnumerable<SubAreaDto>> GetSubAreasForPlantAsync(string plant
 		.ToListAsync();
 }
 ```
+
+---
+
+#### Another simple method syntax example, from the Isolations program:
+
+```csharp
+DeleteCheckDto check = new();
+
+var packagesWithPoint = await _context.PackagePoints // source table
+    .Where(pp => pp.PointId == pointId) // get all relevant rows
+    .Join(
+        _context.Packages, // table to join on
+        pp => pp.PackageId, // one value to match
+        p => p.PackageId, // other value to match it
+        (pp, p) => p // whatever we want to return here
+    )
+    .ToListAsync();
+
+check.InTemplates = packagesWithPoint.Any(p => p.Indicator == "T");
+
+check.PackagesUsingPoint = packagesWithPoint
+    .Select(p => new NameAndDescription(
+        p.PackageName ?? "(No name given)",
+        p.PackageDesc ?? "(No descriptiongiven)"
+        ))
+    .ToList();
+```
+
+
+Regarding the last line `(pp, p) => p` - it's defining what the join operation should return when it finds a match between `PackagePoints` and `Packages`.
+
+In the lambda expression `(pp, p) => p`:
+- `pp` represents an item from the first collection (`PackagePoints`)
+- `p` represents the matching item from the second collection (`Packages`)
+- The `=> p` part means "return just the package object"
+
+The parameter names could technically be anything. They're just variables in the lambda expression. For example, these would all work the same:
+
+```csharp
+(packagePoint, package) => package
+(point, pkg) => pkg 
+(x, y) => y
+```
+
+What matters is the position (first parameter is from the first collection, second is from the second) and what you choose to return after the arrow `=>`.
+
+If you wanted to return a custom object with specific properties from both collections, you could do:
+```csharp
+(pp, p) => new { 
+    PackageId = p.PackageId, 
+    PointId = pp.PointId,
+    PackageName = p.PackageName 
+}
+```
+
+But since you need the full package object to check the Indicator and access other properties later, returning just `p` is the simplest approach.
