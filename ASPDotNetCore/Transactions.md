@@ -1,7 +1,7 @@
 If you have a large set of transactions to make, and want to ensure they all complete before comitting to the database you should use a transaction:
 
 ```csharp
-using var transaction = await _context.Database.BeginTransactionAsync()
+using var transaction = await _context.Database.BeginTransactionAsync();
 
 try 
 {
