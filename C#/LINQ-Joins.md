@@ -187,3 +187,24 @@ If you wanted to return a custom object with specific properties from both colle
 ```
 
 But since you need the full package object to check the Indicator and access other properties later, returning just `p` is the simplest approach.
+
+A good example of the complete flow of creating an anonymous object would be:
+
+```csharp
+var packages = await _context.Packages
+	.Where(p => p.PlantCode == plantCode && (p.Indicator == "C" || p.Indicator == "T"))
+	.Join(
+		_context.PackageTypes,
+		p => p.Indicator,
+		pt => pt.packtype,
+		(p, pt) => new
+		{
+			PackageId = p.PackageId,
+			PackageName = p.PackageName,
+			PackageDesc = p.PackageDesc,
+			Isolation = p.IsolExemption,
+			Indicator = pt.vshdesc
+		}
+	)  // Don't forget this closing parenthesis for the join
+	.ToListAsync();
+```
